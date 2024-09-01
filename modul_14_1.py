@@ -12,12 +12,12 @@ age INTEGER,
 balance INTEGER NOT NULL
 )
 ''')
-
+cursor.execute("DELETE FROM Users")
 for i in range(1,11):
     cursor.execute("INSERT INTO Users (username,email,age,balance) VALUES (?,?,?,?)",(f"User{i}",f"exemple{i}@gmail.com",f"{i*10}","1000"))
 
 for i in range(1,11,2):
-    cursor.execute("UPDATE Users SET balance = balance +? ",(500,))
+    cursor.execute("UPDATE Users SET balance = ? WHERE id = ? ",(500,i))
 
 for i in range(1,11,3):
     cursor.execute("DELETE FROM Users WHERE id = ? ",(i,))
